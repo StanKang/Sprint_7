@@ -30,4 +30,30 @@ public class OrderClient {
         return baseSpec()
                 .get("/api/v1/orders");
     }
+
+    @Step("Принять заказ id={orderId} курьером id={courierId}")
+    public Response acceptOrder(int orderId, int courierId) {
+        return baseSpec()
+                .queryParam("courierId", courierId)
+                .put("/api/v1/orders/accept/" + orderId);
+    }
+
+    @Step("Принять заказ id={orderId} без courierId")
+    public Response acceptOrderWithoutCourier(int orderId) {
+        return baseSpec()
+                .put("/api/v1/orders/accept/" + orderId);
+    }
+
+    @Step("Получить заказ по треку {track}")
+    public Response getOrderByTrack(int track) {
+        return baseSpec()
+                .queryParam("t", track)
+                .get("/api/v1/orders/track");
+    }
+
+    @Step("Получить заказ без трека")
+    public Response getOrderWithoutTrack() {
+        return baseSpec()
+                .get("/api/v1/orders/track");
+    }
 }
