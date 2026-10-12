@@ -1,6 +1,7 @@
 package tests;
 
 import client.OrderClient;
+import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 import static org.hamcrest.Matchers.not;
@@ -11,6 +12,7 @@ public class GetOrderListTest {
     private final OrderClient orderClient = new OrderClient();
 
     @Test
+    @DisplayName("Список заказов возвращает непустой массив")
     void getOrderListReturnsNonEmptyList() {
         orderClient.getOrderList()
                 .then()

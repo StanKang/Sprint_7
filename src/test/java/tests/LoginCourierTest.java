@@ -5,6 +5,7 @@ import models.Courier;
 import models.CourierCredentials;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 import static org.hamcrest.Matchers.equalTo;
@@ -37,6 +38,7 @@ public class LoginCourierTest {
     }
 
     @Test
+    @DisplayName("Успешная авторизация курьера")
     void loginSuccess() {
         courierId = courierClient.login(new CourierCredentials(courier.getLogin(), courier.getPassword()))
                 .then()
@@ -46,6 +48,7 @@ public class LoginCourierTest {
     }
 
     @Test
+    @DisplayName("Авторизация без логина возвращает 400")
     void loginWithoutLoginReturns400() {
         courierClient.login(new CourierCredentials(null, courier.getPassword()))
                 .then()
@@ -54,6 +57,7 @@ public class LoginCourierTest {
     }
 
     @Test
+    @DisplayName("Авторизация без пароля возвращает 400")
     void loginWithoutPasswordReturns400() {
         courierClient.login(new CourierCredentials(courier.getLogin(), ""))
                 .then()
@@ -62,6 +66,7 @@ public class LoginCourierTest {
     }
 
     @Test
+    @DisplayName("Авторизация с неверным логином возвращает 404")
     void loginWithWrongLoginReturns404() {
         courierClient.login(new CourierCredentials("wronglogin_xyz", courier.getPassword()))
                 .then()
@@ -70,6 +75,7 @@ public class LoginCourierTest {
     }
 
     @Test
+    @DisplayName("Авторизация с неверным паролем возвращает 404")
     void loginWithWrongPasswordReturns404() {
         courierClient.login(new CourierCredentials(courier.getLogin(), "wrongpassword_xyz"))
                 .then()

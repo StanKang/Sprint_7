@@ -2,6 +2,7 @@ package tests;
 
 import client.OrderClient;
 import models.Order;
+import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 import java.util.List;
@@ -20,6 +21,7 @@ public class GetOrderByTrackTest {
     }
 
     @Test
+    @DisplayName("Успешное получение заказа по номеру трека")
     void getOrderByTrackSuccess() {
         int track = createOrderAndGetTrack();
 
@@ -31,6 +33,7 @@ public class GetOrderByTrackTest {
     }
 
     @Test
+    @DisplayName("Запрос без номера трека возвращает 400")
     void getOrderWithoutTrackReturns400() {
         orderClient.getOrderWithoutTrack()
                 .then()
@@ -39,6 +42,7 @@ public class GetOrderByTrackTest {
     }
 
     @Test
+    @DisplayName("Запрос с несуществующим номером трека возвращает 404")
     void getOrderWithNonExistentTrackReturns404() {
         orderClient.getOrderByTrack(99999999)
                 .then()

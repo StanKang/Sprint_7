@@ -2,6 +2,7 @@ package tests;
 
 import client.OrderClient;
 import models.Order;
+import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.MethodSource;
 
@@ -26,6 +27,7 @@ public class CreateOrderTest {
 
     @ParameterizedTest
     @MethodSource("colorProvider")
+    @DisplayName("Создание заказа с разными цветами самоката")
     void createOrderWithColor(List<String> color) {
         Order order = new Order(
                 "Иван", "Иванов", "Москва, ул. Ленина 1", "Сокольники",

@@ -4,6 +4,7 @@ import client.CourierClient;
 import models.Courier;
 import models.CourierCredentials;
 import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 import static org.hamcrest.Matchers.equalTo;
@@ -32,6 +33,7 @@ public class DeleteCourierTest {
     }
 
     @Test
+    @DisplayName("Успешное удаление курьера")
     void deleteCourierSuccess() {
         Courier courier = randomCourier();
         courierClient.create(courier);
@@ -45,6 +47,7 @@ public class DeleteCourierTest {
     }
 
     @Test
+    @DisplayName("Удаление курьера с несуществующим id возвращает 404")
     void deleteCourierWithNonExistentIdReturns404() {
         courierClient.delete(99999999)
                 .then()

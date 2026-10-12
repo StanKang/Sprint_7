@@ -4,6 +4,7 @@ import client.CourierClient;
 import models.Courier;
 import models.CourierCredentials;
 import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 import static org.hamcrest.Matchers.equalTo;
@@ -33,6 +34,7 @@ public class CreateCourierTest {
     }
 
     @Test
+    @DisplayName("Успешное создание курьера")
     void createCourierSuccess() {
         Courier courier = randomCourier();
         courierClient.create(courier)
@@ -43,6 +45,7 @@ public class CreateCourierTest {
     }
 
     @Test
+    @DisplayName("Нельзя создать дубликат курьера")
     void cannotCreateDuplicateCourier() {
         Courier courier = randomCourier();
         courierClient.create(courier);
@@ -55,6 +58,7 @@ public class CreateCourierTest {
     }
 
     @Test
+    @DisplayName("Создание курьера без логина возвращает 400")
     void createCourierWithoutLoginReturns400() {
         courierClient.create(new Courier(null, "password123", "Ivan"))
                 .then()
@@ -63,6 +67,7 @@ public class CreateCourierTest {
     }
 
     @Test
+    @DisplayName("Создание курьера без пароля возвращает 400")
     void createCourierWithoutPasswordReturns400() {
         courierClient.create(new Courier("ninja" + System.currentTimeMillis(), null, "Ivan"))
                 .then()
@@ -71,6 +76,7 @@ public class CreateCourierTest {
     }
 
     @Test
+    @DisplayName("Создание курьера с существующим логином возвращает 409")
     void createCourierWithExistingLoginReturns409() {
         Courier courier = randomCourier();
         courierClient.create(courier);

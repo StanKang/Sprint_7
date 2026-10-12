@@ -7,6 +7,7 @@ import models.CourierCredentials;
 import models.Order;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 import java.util.List;
@@ -42,6 +43,7 @@ public class AcceptOrderTest {
     }
 
     @Test
+    @DisplayName("Успешное принятие заказа")
     void acceptOrderSuccess() {
         orderClient.acceptOrder(orderId, courierId)
                 .then()
@@ -50,6 +52,7 @@ public class AcceptOrderTest {
     }
 
     @Test
+    @DisplayName("Принятие заказа без id курьера возвращает 400")
     void acceptOrderWithoutCourierIdReturns400() {
         orderClient.acceptOrderWithoutCourier(orderId)
                 .then()
@@ -58,6 +61,7 @@ public class AcceptOrderTest {
     }
 
     @Test
+    @DisplayName("Принятие заказа с несуществующим id курьера возвращает 404")
     void acceptOrderWithWrongCourierIdReturns404() {
         orderClient.acceptOrder(orderId, 99999999)
                 .then()
@@ -66,6 +70,7 @@ public class AcceptOrderTest {
     }
 
     @Test
+    @DisplayName("Принятие заказа с несуществующим id заказа возвращает 404")
     void acceptOrderWithWrongOrderIdReturns404() {
         orderClient.acceptOrder(99999999, courierId)
                 .then()
